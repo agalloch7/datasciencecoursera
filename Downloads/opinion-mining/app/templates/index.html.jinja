@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block all %}
+<div class="page-header">
+	<img src="/static/img/philips.jpg" height='90'><h1><b>Opinion Summary of Hue App</b><br>
+</div>
+
+<body> 
+	<br>
+	<br>
+	<p> Aspect-based sentiment analysis uses natural language processing and machine learning to automatically generate an aspect-based sentiment summary from the raw text of English app reviews. 
+	<br><br>
+	To use:
+	<br>
+	1. Download app review from App Annie website. Please download CSV format!
+	<br>
+	2. Upload the file below. The system will automatically select only English reviews.
+	<br>
+	3. Select a version (only available in iOS), or a date range (for both iOS and Android) upon page alert.
+	<br>
+	<br>
+	<div class = "row">
+		<div class = "col-md-4">
+		<h1>1. Upload CSV file</h1>
+		<form action="upload" class ="dropzone" method="POST" enctype="multipart/form-data">
+		</form>
+		</div>
+		<div class = "col-md-4">
+		<h1>2. Select time range</h1>
+		Please select a time range, click on "custom range" to select a start date and end date
+		<form action="processdate" method="POST">
+			<div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+
+		    	<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+
+		    <span></span> <b class="caret"></b>
+			</div>
+		</form>
+		</div>
+		<div class = "col-md-4">
+		<h1>Select app version (optional) </h1>
+		Or enter a version to analyze: (iOS only):
+			<div class="form-group">
+  				<label for="version">Version number (For example: 2.8.0 or 2.7.2):</label>
+			  	<input type="text" class="form-control" id="version">
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<br>
+	<button type="button" class="btn btn-primary">Analyze</button>
+	<br>
+	<br>
+	<br>
+	Please select a version to explore results:
+	</p>
+	<br>
+
+	<ul>
+		{% for business in businesses %}
+			<li> 
+				<a href="/summaries/{{ business['business_id'] }}">{{ business['version'] }} </a>
+			</li> 
+		{% endfor %}
+	</ul>
+	<br>
+	<br>
+
+<script type="text/javascript">
+$(function() {
+
+    var start = moment().subtract(29, 'days');
+    var end = moment();
+
+    function cb(start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    }
+
+    $('#reportrange').daterangepicker({
+        startDate: start,
+        endDate: end,
+        ranges: {
+           'Today': [moment(), moment()],
+           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+           'This Month': [moment().startOf('month'), moment().endOf('month')],
+           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+    }, cb);
+
+    cb(start, end);
+    
+});
+</script>
+
+</body>
+{% endblock %}

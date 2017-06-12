@@ -1,0 +1,209 @@
+.clearfix {
+    *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+    line-height: 0;
+}
+.clearfix:after {
+    clear: both;
+}
+.hide-text {
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+.input-block-level {
+    display: block;
+    width: 100%;
+    min-height: 30px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.btn-file {
+    overflow: hidden;
+    position: relative;
+    vertical-align: middle;
+}
+.btn-file>input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    transform: translate(-300px, 0) scale(4);
+    font-size: 23px;
+    direction: ltr;
+    cursor: pointer;
+}
+.fileupload {
+    margin-bottom: 9px;
+}
+.fileupload .uneditable-input {
+    display: inline-block;
+    margin-bottom: 0px;
+    vertical-align: middle;
+    cursor: text;
+}
+.fileupload .thumbnail {
+    overflow: hidden;
+    display: inline-block;
+    margin-bottom: 5px;
+    vertical-align: middle;
+    text-align: center;
+}
+.fileupload .thumbnail>img {
+    display: inline-block;
+    vertical-align: middle;
+    max-height: 100%;
+}
+.fileupload .btn {
+    vertical-align: middle;
+}
+.fileupload-exists .fileupload-new,
+.fileupload-new .fileupload-exists {
+    display: none;
+}
+.fileupload-inline .fileupload-controls {
+    display: inline;
+}
+.fileupload-new .input-append .btn-file {
+    -webkit-border-radius: 0 3px 3px 0;
+    -moz-border-radius: 0 3px 3px 0;
+    border-radius: 0 3px 3px 0;
+}
+.thumbnail-borderless .thumbnail {
+    border: none;
+    padding: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+.fileupload-new.thumbnail-borderless .thumbnail {
+    border: 1px solid #ddd;
+}
+.control-group.warning .fileupload .uneditable-input {
+    color: #a47e3c;
+    border-color: #a47e3c;
+}
+.control-group.warning .fileupload .fileupload-preview {
+    color: #a47e3c;
+}
+.control-group.warning .fileupload .thumbnail {
+    border-color: #a47e3c;
+}
+.control-group.error .fileupload .uneditable-input {
+    color: #b94a48;
+    border-color: #b94a48;
+}
+.control-group.error .fileupload .fileupload-preview {
+    color: #b94a48;
+}
+.control-group.error .fileupload .thumbnail {
+    border-color: #b94a48;
+}
+.control-group.success .fileupload .uneditable-input {
+    color: #468847;
+    border-color: #468847;
+}
+.control-group.success .fileupload .fileupload-preview {
+    color: #468847;
+}
+.control-group.success .fileupload .thumbnail {
+    border-color: #468847;
+}
+
+#dropbox{
+    border: 1px solid grey;
+    border-radius: 3px;
+    position: relative;
+    margin: 80px auto 90px;
+    min-height: 290px;
+    overflow: hidden;
+    padding-bottom: 40px;
+    width: 990px;
+}
+
+
+#dropbox .message{
+    font-size: 11px;
+    text-align: center;
+    padding-top: 160px;
+    display: block;
+}
+
+#dropbox:before{
+    border-radius: 3px 3px 0 0;
+}
+
+#dropbox .preview{
+    width: 245px;
+    height: 215px;
+    float: left;
+    margin: 55px 0 0 60px;
+    position: relative;
+    text-align: center;
+}
+
+#dropbox .preview img{
+    max-width: 240px;
+    max-height: 180px;
+    border: 3px solid #fff;
+    display: block;
+    box-shadow: 0 0 2px #000;
+}
+
+#dropbox .imageHolder{
+    display: inline-block;
+    position: relative;
+}
+
+#dropbox .uploaded{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: url('../img/done.png') no-repeat center center rgba(255,255,255,0.5);
+    display: none;
+}
+
+#dropbox .preview.done .uploaded{
+    display: block;
+}
+
+#dropbox .progressHolder{
+    position: absolute;
+    background-color:#252f38;
+    height: 12px;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    box-shadow: 0 0 2px #000;
+}
+
+#dropbox .progress{
+    background-color:#2586d0;
+    position: absolute;
+    height: 100%;
+    left: 0;
+    width: 0;
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.4) inset;
+    -moz-transition: 0.25s;
+    -webkit-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+}
+
+#dropbox .preview.done .progress{
+    width: 100% !important;
+}

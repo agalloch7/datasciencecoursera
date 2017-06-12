@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block all %}
+	<head>
+		 <h1><b>{{ summary['business_name'] }}</b></h1>
+	</head>
+
+	<body>
+
+		<ul class="nav nav-pills" role="tablist">
+		
+		{% for aspect in summary['aspect_summary'] %}
+
+			{% if loop.index == 1 %}
+				<li class="active"><a href=#{{ aspect.replace(" ", "_").replace("'", "_") }} role="tab" data-toggle="tab">{{ aspect }} </a></li>
+			{% else %}
+				<li><a href=#{{ aspect.replace(" ", "_").replace("'", "_") }} role="tab" data-toggle="tab">{{ aspect }} </a></li>
+			{% endif %}
+
+		{% endfor %}
+
+		</ul>
+
+		<div class="tab-content">
+		 
+		{% for aspect in summary['aspect_summary'] %} 
+
+		  {% if loop.index == 1%}	
+		  <div class="tab-pane active" id="{{ aspect.replace(" ", "_").replace("'", "_")}}">
+		  {% else %}
+		  <div class="tab-pane" id="{{ aspect.replace(" ", "_").replace("'", "_")}}">
+		  {% endif %}
+
+			<h1><b>{{ aspect }}</h1></b>
+
+		  	<div class="progress">
+				  	<div class="progress-bar progress-bar-success" style="width: {{ summary['aspect_summary'][aspect]['frac_pos']*100 }}%;">
+				  		<span>Positive</span>
+				  	</div>
+				  	<div class="progress-bar progress-bar-danger" style="width: {{ 100 - summary['aspect_summary'][aspect]['frac_pos']*100 }}%">
+				  		<span>Negative</span>
+				  	</div>
+			</div>
+
+			<h2><b>Review Rating 1 <span class="label label-danger">{{ summary['aspect_summary'][aspect]['num_one'] }}</span></b></h2>
+				<ul>
+					{% for one_sent in summary['aspect_summary'][aspect]['one'] %}
+						{% if loop.index | less_than_ten %}
+							<li>
+								{{ one_sent['text'] }} - <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#fullreview"> {{ one_sent['user']}} 
+								</button>
+								<!-- <span class="label label-default"> {{ one_sent['prob_opin'] | round(2) }} </span> 
+								<span class="label label-danger"> {{ one_sent['prob_pos'] | round(2) }} </span>
+ -->							</li>
+						{% endif %}
+					{% endfor %}
+				</ul>	
+			<h2><b>Review Rating 2 <span class="label label-danger">{{ summary['aspect_summary'][aspect]['num_two'] }}</span></b></h2>
+				<ul>
+					{% for two_sent in summary['aspect_summary'][aspect]['two'] %}
+						{% if loop.index | less_than_ten %}
+						<li>
+							{{ two_sent['text'] }} - {{ two_sent['user']}} 
+							<!-- <span class="label label-default"> {{ two_sent['prob_opin'] | round(2) }} </span>
+							<span class="label label-danger"> {{ two_sent['prob_neg'] | round(2) }} </span> -->
+						</li>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			<h2><b>Review Rating 3 <span class="label label-success">{{ summary['aspect_summary'][aspect]['num_three'] }}</span></b></h2>
+				<ul>
+					{% for three_sent in summary['aspect_summary'][aspect]['three'] %}
+						{% if loop.index | less_than_ten %}
+						<li>
+							{{ three_sent['text'] }} - {{ three_sent['user']}} 
+							<!-- <span class="label label-default"> {{ three_sent['prob_opin'] | round(2) }} </span>
+							<span class="label label-success"> {{ three_sent['prob_neg'] | round(2) }} </span> -->
+						</li>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			<h2><b>Review Rating 4 <span class="label label-success">{{ summary['aspect_summary'][aspect]['num_four'] }}</span></b></h2>
+				<ul>
+					{% for four_sent in summary['aspect_summary'][aspect]['four'] %}
+						{% if loop.index | less_than_ten %}
+						<li>
+							{{ four_sent['text'] }} - {{ four_sent['user']}} 
+							<!-- <span class="label label-default"> {{ four_sent['prob_opin'] | round(2) }} </span>
+							<span class="label label-success"> {{ four_sent['prob_neg'] | round(2) }} </span> -->
+						</li>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			<h2><b>Review Rating 5 <span class="label label-success">{{ summary['aspect_summary'][aspect]['num_five'] }}</span></b></h2>
+				<ul>
+					{% for five_sent in summary['aspect_summary'][aspect]['five'] %}
+						{% if loop.index | less_than_ten %}
+						<li>
+							{{ two_sent['text'] }} - {{ two_sent['user']}} 
+							<!-- <span class="label label-default"> {{ five_sent['prob_opin'] | round(2) }} </span>
+							<span class="label label-success"> {{ five_sent['prob_neg'] | round(2) }} </span> -->
+						</li>
+						{% endif %}
+					{% endfor %}
+				</ul>
+		  </div>
+
+		  <!-- Modal -->
+			<div class="modal fade" id="fullreview" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">Full Review</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        ...
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		
+		{% endfor %}
+
+		</div>
+
+	</body>
+
+	<br>
+	<div class="footer navbar navbar-default">
+		<p class="text-center"> <a href="/dashboard"> Return to Dashboard </a> </p>
+	</div>
+{% endblock %}

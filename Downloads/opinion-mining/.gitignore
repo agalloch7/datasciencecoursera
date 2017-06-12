@@ -1,0 +1,13 @@
+#.gitignore
+
+references
+data
+*.py[co]
+.gitignore~
+*~
+raw_data
+modeling/domino
+modeling/.dominoignore
+modeling/domino.log
+modeling/.domino
+deploy
